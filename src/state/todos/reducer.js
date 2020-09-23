@@ -10,10 +10,14 @@ function reducer(state, action) {
         completed: false,
       });
     case todoTypes.REMOVE_TODO:
-      return;
-    case todoTypes.TOGGLE_TODO_STATUS:
       return state.filter((todo) => {
-        if (todo.id !== action.payload.id) {
+        return todo.id !== action.payload.id;
+      });
+    case todoTypes.TOGGLE_TODO_STATUS:
+      return state.map((todo) => {
+        if (todo.id === action.payload.id) {
+          return { ...todo, completed: action.payload.completed };
+        } else {
           return todo;
         }
       });
