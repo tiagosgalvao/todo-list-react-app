@@ -1,22 +1,39 @@
-import React, { useContext, useCallback, useEffect } from "react";
+import React, { useContext, useState, useCallback } from "react";
 import TodoContext from "../../../state/todos/Context";
 import styles from "./TodoList.module.css";
 import TodoItem from "./components/TodoItem/TodoItem";
 import * as todosActions from "../../../state/todos/actions";
+import TodoModal from "./components/TodoModal/TodoModal";
 
 function TodoList() {
   const { todos, todosDispatch } = useContext(TodoContext);
-  useEffect(() => {
-    console.log(todos);
-  }, [todos]);
+  const handleTitleUpdate = useCallback(
+    (id, title) => {
+      console.log(id, title);
+      todosDispatch(todosActions.toggleTodoTitle(id, title));
+    },
+    [todosDispatch]
+  );
+  const handleStatusUpdate = useCallback(
+    (id, completed) => {
+      todosDispatch(todosActions.toggleTodoStatus(id, completed));
+    },
+    [todosDispatch]
+  );
   const handleDelete = useCallback(
     (id) => {
       todosDispatch(todosActions.removeTodo(id));
     },
     [todosDispatch]
   );
-  const handleStatusUpdate = useCallback((id, completed) => {
-    todosDispatch(todosActions.toggleTodoStatus(id, completed));
+  const [showModal, setShowModal] = useState(false);
+  const [curId, setCurId] = useState(null);
+  const handleModalOpen = useCallback((id) => {
+    setCurId(id);
+    setShowModal(true);
+  }, []);
+  const handleModalClose = useCallback(() => {
+    setShowModal(false);
   }, []);
   return (
     <div className={styles.container}>
@@ -28,14 +45,20 @@ function TodoList() {
               key={todo.id}
               title={todo.title}
               completed={todo.completed}
+              onModalOpen={handleModalOpen}
               onStatusUpdate={handleStatusUpdate}
-              onDelete={() => {
-                handleDelete(todo.id);
-              }}
+              onDelete={handleDelete}
             />
           );
         })}
       </ul>
+      {showModal && (
+        <TodoModal
+          id={curId}
+          onModalClose={handleModalClose}
+          onTitleUpdate={handleTitleUpdate}
+        />
+      )}
     </div>
   );
 }

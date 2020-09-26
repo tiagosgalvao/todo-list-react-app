@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useRef } from "react";
 import { useFormik } from "formik";
+import * as yup from "yup";
 import TodosContext from "../../../state/todos/Context";
 import * as todosActions from "../../../state/todos/actions";
-import * as yup from "yup";
 import styles from "./TodoCreator.module.css";
 
 function TodoCreator() {
