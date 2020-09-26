@@ -1,13 +1,12 @@
 import React from "react";
 import TodoCreator from "../containers/TodoCreator/TodoCreator";
+import TodoList from "../containers/TodoList/TodoList";
 
 function TodoApp() {
   return (
     <>
-      <header>
-        <TodoCreator></TodoCreator>
-      </header>
-      <main>TodoList</main>
+      <TodoCreator></TodoCreator>
+      <TodoList></TodoList>
       <footer>TodoFilter</footer>
     </>
   );
