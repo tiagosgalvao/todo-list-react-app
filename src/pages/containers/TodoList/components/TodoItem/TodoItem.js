@@ -1,4 +1,7 @@
 import React, { useState, useCallback, useEffect } from "react";
+import { ReactComponent as UpdateTitleIcon } from "../../../../../assets/icons/update-icon.svg";
+import { ReactComponent as DeleteTitleIcon } from "../../../../../assets/icons/delete-icon.svg";
+import styles from "./TodoItem.module.css";
 
 function TodoItem({
   id,
@@ -15,18 +18,24 @@ function TodoItem({
   useEffect(() => {
     onStatusUpdate(id, isChecked);
   }, [id, isChecked, onStatusUpdate]);
-  const hableTitleUpdate = useCallback(() => {
+  const hableModalOpen = useCallback(() => {
     onModalOpen(id);
   }, [id, onModalOpen]);
   const handleDelete = useCallback(() => {
     onDelete(id);
   }, [id, onDelete]);
   return (
-    <li>
-      <span>{title}</span>
-      <button onClick={hableTitleUpdate}>Update</button>
-      <input type="checkbox" value={isChecked} onChange={handleChange} />
-      <button onClick={handleDelete}>Delete</button>
+    <li className={styles.item}>
+      <span className={completed ? styles.completed : null}>{title}</span>
+      <div className={styles.controlButtons}>
+        <button onClick={hableModalOpen}>
+          <UpdateTitleIcon />
+        </button>
+        <input type="checkbox" value={isChecked} onChange={handleChange} />
+        <button onClick={handleDelete}>
+          <DeleteTitleIcon />
+        </button>
+      </div>
     </li>
   );
 }
