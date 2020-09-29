@@ -24,9 +24,9 @@ function TodoItem({
   return (
     <li>
       <span>{title}</span>
-      <button onClick={hableTitleUpdate}>Atualizar</button>
+      <button onClick={hableTitleUpdate}>Update</button>
       <input type="checkbox" value={isChecked} onChange={handleChange} />
-      <button onClick={handleDelete}>Deletar</button>
+      <button onClick={handleDelete}>Delete</button>
     </li>
   );
 }
