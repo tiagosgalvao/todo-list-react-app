@@ -26,6 +26,7 @@ function TodoCreator() {
   return (
     <form className={styles.container} onSubmit={handleSubmit}>
       <input
+        className={styles.input}
         type="text"
         placeholder="New task"
         autoComplete="off"
@@ -35,7 +36,7 @@ function TodoCreator() {
       {touched.title && errors.title ? (
         <small className={styles.error}>{errors.title}</small>
       ) : null}
-      <button type="submit" disabled={!isValid}>
+      <button type="submit" className={styles.submit} disabled={!isValid}>
         Add task
       </button>
     </form>

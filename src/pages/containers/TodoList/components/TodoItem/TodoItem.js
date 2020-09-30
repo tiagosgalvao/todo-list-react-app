@@ -18,9 +18,9 @@ function TodoItem({
   useEffect(() => {
     onStatusUpdate(id, isChecked);
   }, [id, isChecked, onStatusUpdate]);
-  const hableModalOpen = useCallback(() => {
-    onModalOpen(id);
-  }, [id, onModalOpen]);
+  const handleModalOpen = useCallback(() => {
+    onModalOpen(id, title);
+  }, [id, title, onModalOpen]);
   const handleDelete = useCallback(() => {
     onDelete(id);
   }, [id, onDelete]);
@@ -28,7 +28,7 @@ function TodoItem({
     <li className={styles.item}>
       <span className={completed ? styles.completed : null}>{title}</span>
       <div className={styles.controlButtons}>
-        <button onClick={hableModalOpen}>
+        <button onClick={handleModalOpen}>
           <UpdateTitleIcon />
         </button>
         <input type="checkbox" value={isChecked} onChange={handleChange} />

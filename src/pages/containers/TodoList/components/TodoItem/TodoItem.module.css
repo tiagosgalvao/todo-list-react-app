@@ -9,7 +9,8 @@
   border-width: 2px;
   border-style: solid;
   border-radius: 10px;
-  border-color: lightblue;
+  border-color: rgb(240, 194, 194);
+  color: darkcyan;
 }
 .completed {
   text-decoration: line-through;
