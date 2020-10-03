@@ -1,8 +1,13 @@
 import React from "react";
+import styles from "./TodoSelect.module.css";
 
 function TodoSelect({ intialState, onOptionChange, options }) {
   return (
-    <select value={intialState} onChange={onOptionChange}>
+    <select
+      className={styles.select}
+      value={intialState}
+      onChange={onOptionChange}
+    >
       {options.map((option) => {
         return (
           <option key={option.value} value={option.value}>
