@@ -31,7 +31,7 @@ function TodoItem({
         <button onClick={handleModalOpen}>
           <UpdateTitleIcon />
         </button>
-        <input type="checkbox" value={isChecked} onChange={handleChange} />
+        <input type="checkbox" checked={isChecked} onChange={handleChange} />
         <button onClick={handleDelete}>
           <DeleteTitleIcon />
         </button>

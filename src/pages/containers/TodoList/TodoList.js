@@ -1,9 +1,27 @@
 import React, { useContext, useState, useCallback } from "react";
 import TodoContext from "../../../state/todos/Context";
-import styles from "./TodoList.module.css";
-import TodoItem from "./components/TodoItem/TodoItem";
 import * as todosActions from "../../../state/todos/actions";
+import TodoItem from "./components/TodoItem/TodoItem";
 import TodoModal from "./components/TodoModal/TodoModal";
+import FilterContext from "../../../state/filter/Context";
+import styles from "./TodoList.module.css";
+
+function filteredList(list, curFilter) {
+  switch (curFilter) {
+    case "all":
+      return list;
+    case "active":
+      return list.filter((item) => {
+        return item.completed === false;
+      });
+    case "completed":
+      return list.filter((item) => {
+        return item.completed === true;
+      });
+    default:
+      throw new Error();
+  }
+}
 
 function TodoList() {
   const { todos, todosDispatch } = useContext(TodoContext);
@@ -43,10 +61,11 @@ function TodoList() {
     },
     [todos]
   );
+  const { filter, filterDispatch } = useContext(FilterContext);
   return (
     <div className={styles.container}>
       <ul>
-        {todos.map((todo) => {
+        {filteredList(todos, filter).map((todo) => {
           return (
             <TodoItem
               id={todo.id}
