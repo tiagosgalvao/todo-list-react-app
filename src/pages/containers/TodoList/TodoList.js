@@ -45,7 +45,6 @@ function TodoList() {
     [todosDispatch]
   );
   const [curId, setCurId] = useState(null);
-  const [curTitle, setCurTitle] = useState("");
   const handleModalOpen = useCallback((id) => {
     setCurId(id);
   }, []);
@@ -61,7 +60,7 @@ function TodoList() {
     },
     [todos]
   );
-  const { filter, filterDispatch } = useContext(FilterContext);
+  const { filter } = useContext(FilterContext);
   return (
     <div className={styles.container}>
       <ul>
