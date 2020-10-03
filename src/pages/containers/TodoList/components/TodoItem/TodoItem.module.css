@@ -49,7 +49,7 @@
   cursor: pointer;
 }
 .controlButtons input[type="checkbox"]:checked {
-  background-color: lightpink;
+  background-color: rgb(144, 228, 224);
   box-shadow: inset 0px 0px 4px 2px lightgray;
 }
 .controlButtons input[type="checkbox"]::before {
@@ -67,4 +67,6 @@
 }
 .controlButtons input[type="checkbox"]:checked::before {
   left: 20px;
+  background-color: lightseagreen;
+  box-shadow: inset 0px 0px 4px 1px gray;
 }
