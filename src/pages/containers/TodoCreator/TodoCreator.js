@@ -7,13 +7,15 @@ import styles from "./TodoCreator.module.css";
 
 function TodoCreator() {
   const { todosDispatch } = useContext(TodosContext);
-  const { getFieldProps, touched, errors, isValid, handleSubmit } = useFormik({
+  const { getFieldProps, errors, handleSubmit } = useFormik({
     initialValues: {
       title: "",
     },
     validationSchema: yup.object({
       title: yup.string().required("Task title is mandatory"),
     }),
+    validateOnChange: false,
+    validateOnBlur: false,
     onSubmit: (values, formikBag) => {
       todosDispatch(todosActions.addTodo(values.title));
       formikBag.setFieldValue("title", "", false);
@@ -33,10 +35,10 @@ function TodoCreator() {
         ref={inputTitle}
         {...getFieldProps("title")}
       ></input>
-      {touched.title && errors.title ? (
+      {errors.title ? (
         <small className={styles.error}>{errors.title}</small>
       ) : null}
-      <button type="submit" className={styles.submit} disabled={!isValid}>
+      <button type="submit" className={styles.submit}>
         Add task
       </button>
     </form>

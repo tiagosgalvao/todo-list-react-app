@@ -5,13 +5,15 @@ import { ReactComponent as CloseIcon } from "../../../../../assets/icons/delete-
 import styles from "./TodoModal.module.css";
 
 function TodoModal({ id, onModalClose, onTitleUpdate, getTitle }) {
-  const { getFieldProps, touched, errors, isValid, handleSubmit } = useFormik({
+  const { getFieldProps, errors, handleSubmit } = useFormik({
     initialValues: {
       title: getTitle(id),
     },
     validationSchema: yup.object({
       title: yup.string().required("Task title is mandatory"),
     }),
+    validateOnChange: false,
+    validateOnBlur: false,
     onSubmit: (values, formikBag) => {
       onTitleUpdate(id, values.title);
       formikBag.setFieldValue("title", "", false);
@@ -38,10 +40,10 @@ function TodoModal({ id, onModalClose, onTitleUpdate, getTitle }) {
             ref={inputTitle}
             {...getFieldProps("title")}
           ></input>
-          {touched.title && errors.title ? (
+          {errors.title ? (
             <small className={styles.error}>{errors.title}</small>
           ) : null}
-          <button type="submit" className={styles.submit} disabled={!isValid}>
+          <button type="submit" className={styles.submit}>
             Update task
           </button>
         </form>
