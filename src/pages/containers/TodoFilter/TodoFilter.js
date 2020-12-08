@@ -29,8 +29,8 @@ function TodoFilter() {
         onOptionChange={handleOptionChange}
         options={[
           { value: "all", title: "All tasks" },
-          { value: "active", title: "Tasks todo" },
-          { value: "completed", title: "Tasks done" },
+          { value: "active", title: "Todo" },
+          { value: "completed", title: "Done" },
         ]}
       />
     </div>
